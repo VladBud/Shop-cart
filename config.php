@@ -5,5 +5,8 @@
  */
 define('ROOT', str_replace('\\','/', dirname(__FILE__)));
 
-define('TYPE_CONNECTION', 'sqlite');
+/**
+ * could be named as class in components\connections(Redis or Sqlite)
+ */
+define('TYPE_CONNECTION', 'Sqlite');
 define('DATABASE_PATH', ROOT.'/database.db');

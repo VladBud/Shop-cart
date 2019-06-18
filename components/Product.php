@@ -1,5 +1,8 @@
 <?php
 
+namespace components;
+
+use components\connections\Sqlite;
 
 class Product
 {
@@ -11,8 +14,9 @@ class Product
     }
 
     public function getAllProducts() {
-        return $this->connection->getAllProducts();
+        $dbStorage = new Sqlite();
 
+        return $dbStorage->getAllProducts();
     }
 
 }

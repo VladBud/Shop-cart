@@ -43,10 +43,11 @@ body {
 	border: #00d01c 1px solid;
 	padding: 5px 10px;
 	color: #00D01C;
-	float: right;
+	float: left;
 	text-decoration: none;
 	border-radius: 3px;
-	margin: 10px 0px;
+	/*margin: 5px 0px;*/
+	margin-top: -6px;
 }
 
 .btnAddAction {

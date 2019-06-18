@@ -1,0 +1,17 @@
+{
+    "name": "admin/simple-php-shopping-cart",
+    "authors": [
+        {
+            "name": "valter.b",
+            "email": "valter.b@mobilife.plus"
+        }
+    ],
+    "require": {
+        "predis/predis": "^1.1"
+    },
+    "autoload": {
+        "psr-4": {
+            "components\\": "components/"
+        }
+    }
+}

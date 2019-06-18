@@ -1,5 +1,8 @@
 <?php
 
+namespace components;
+
+use components\interfaces\ConnectionInterface;
 
 class Connection
 {

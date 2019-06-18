@@ -1,8 +1,15 @@
 <?php
 
+namespace components\connections;
+
+use PDO;
+use components\interfaces\ConnectionInterface;
+
 class Sqlite implements ConnectionInterface
 {
-
+    /**
+     * @return array
+     */
     public function getAllProducts() {
         $dbh = $this->connect();
 
@@ -22,11 +29,14 @@ class Sqlite implements ConnectionInterface
         return $result;
     }
 
+    /**
+     * @param $productName
+     * @param $quantity
+     * @param $price
+     */
     public function insertIntoCart($productName, $quantity, $price) {
 
         $dbh = $this->connect();
-
-        var_dump($productName, $quantity, $price);
 
         if($this->checkInCart($productName)) {
             $stmt = $dbh->prepare("UPDATE cart SET quantity = quantity + :quantity WHERE product = :product");
@@ -41,11 +51,13 @@ class Sqlite implements ConnectionInterface
             $stmt->bindParam(':price', $price);
 
             $stmt->execute();
-
-            var_dump(2222);
         }
     }
 
+    /**
+     * @param $productName
+     * @return bool
+     */
     public function checkInCart($productName) {
         $dbh = $this->connect();
 
@@ -59,6 +71,9 @@ class Sqlite implements ConnectionInterface
         return $number_of_rows == 0 ? false : true;
     }
 
+    /**
+     * @return array
+     */
     public function selectAllCart() {
         $dbh = $this->connect();
 
@@ -78,7 +93,28 @@ class Sqlite implements ConnectionInterface
         return $result;
     }
 
+    /**
+     * @return PDO
+     */
     public function connect() {
         return new PDO('sqlite:/' . DATABASE_PATH);
+    }
+
+    public function removeAll()
+    {
+        $dbh = $this->connect();
+
+        $stmt = $dbh->prepare("DELETE FROM cart");
+        $stmt->execute();
+
+    }
+
+    public function removeElement($productName)
+    {
+        $dbh = $this->connect();
+
+        $stmt = $dbh->prepare("DELETE FROM cart WHERE product = :product");
+        $stmt->bindParam(':product', $productName);
+        $stmt->execute();
     }
 }

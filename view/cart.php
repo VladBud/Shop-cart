@@ -1,4 +1,4 @@
-<html>
+<html xmlns="http://www.w3.org/1999/html">
 <head>
     <title>Simple PHP Shopping Cart</title>
     <link href="assets/style.css" type="text/css" rel="stylesheet" />
@@ -7,9 +7,13 @@
 <div id="shopping-cart">
     <div class="txt-heading">Shopping Cart</div>
 
-    <a id="btnEmpty" href="/?page=cart">Empty Cart</a>
-        <table class="tbl-cart" cellpadding="10" cellspacing="1">
-            <tbody>
+    <form method="post" action="/?page=cart">
+        <button type="submit" name="deleteAll" id="btnEmpty" >Empty Cart</button>
+    </form>
+
+    <a id="card" href="/">Back to products</a>
+    <table class="tbl-cart" cellpadding="10" cellspacing="1">
+        <tbody>
             <tr>
                 <th style="text-align:left;">Name</th>
                 <th style="text-align:right;" width="5%">Quantity</th>
@@ -27,9 +31,12 @@
                         <td style="text-align:right;"><?= $allCart[$key]["quantity"]; ?></td>
                         <td  style="text-align:right;"><?= $allCart[$key]["price"]."₴"; ?></td>
                         <td style="text-align:center;">
-                            <a href="index.php?action=remove&code=<?= $item["code"]; ?>" class="btnRemoveAction">
-                                <img src="assets/images/icon-delete.png" alt="Remove Item" />
-                            </a>
+                            <form method="post" action="/?page=cart">
+                                <input type="text" name="title" hidden value="<?= $allCart[$key]["product"]; ?>"/>
+                                <button type="submit" name="delete" class="btnRemoveAction">
+                                    <img src="assets/images/icon-delete.png" alt="Remove Item" />
+                                </button>
+                            </form>
                         </td>
                     </tr>
                     <?php $total_quantity += $allCart[$key]["quantity"]; ?>
@@ -37,21 +44,14 @@
                 <?php endforeach; ?>
                 <tr>
                     <td colspan="2" align="left">Total:</td>
-                    <td align="right"><?= $total_quantity ?></td>
+                    <td align="right">Quantity: <?= $total_quantity ?></td>
                     <td align="right" colspan="2">
-                        <strong><?= $total_price ."₴"?></strong>
+                        <strong> Price: <?= $total_price ."₴"?></strong>
                     </td>
                 </tr>
             <?php endif; ?>
             </tbody>
-        </table>
-<!--        --><?php
-//    } else {
-//        ?>
-<!--        <div class="no-records">Your Cart is Empty</div>-->
-<!--        --><?php
-//    }
-//    ?>
+    </table>
 </div>
 </body>
 </html>

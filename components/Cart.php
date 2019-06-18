@@ -1,5 +1,6 @@
 <?php
 
+namespace components;
 
 class Cart
 {
@@ -19,5 +20,13 @@ class Cart
 
     public function selectAllCart() {
         return $this->connection->selectAllCart();
+    }
+
+    public function removeElement($productName) {
+        return $this->connection->removeElement($productName);
+    }
+
+    public function removeAll() {
+        return $this->connection->removeAll();
     }
 }
