@@ -25,9 +25,7 @@
                 <?php $total_quantity = 0; $total_price = 0; ?>
                 <?php foreach ($allCart as $key=>$value): ?>
                     <tr>
-                        <td>
-                            <img src="<?= $allCart[$key]["img"]; ?>" class="cart-item-image" /><?= $allCart[$key]["product"]; ?>
-                        </td>
+                        <td><?= $allCart[$key]["product"]; ?></td>
                         <td style="text-align:right;"><?= $allCart[$key]["quantity"]; ?></td>
                         <td  style="text-align:right;"><?= $allCart[$key]["price"]."₴"; ?></td>
                         <td style="text-align:center;">
